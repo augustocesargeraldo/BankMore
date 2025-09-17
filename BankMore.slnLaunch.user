@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "Novo Perfil",
+    "Projects": [
+      {
+        "Path": "src\\ContaCorrente\\BankMore.ContaCorrente.Api\\BankMore.ContaCorrente.Api.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "src\\Transferencia\\BankMore.Transferencia.Api\\BankMore.Transferencia.Api.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]
