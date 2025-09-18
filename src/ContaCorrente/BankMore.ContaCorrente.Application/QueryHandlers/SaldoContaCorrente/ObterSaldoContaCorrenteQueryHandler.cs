@@ -4,8 +4,7 @@ using BankMore.ContaCorrente.Application.Repositories;
 namespace BankMore.ContaCorrente.Application.QueryHandlers.SaldoContaCorrente
 {
     public class ObterSaldoContaCorrenteQueryHandler(
-        IContaCorrenteRepository contaCorrenteRepository,
-        IMovimentoRepository movimentoRepository) : IObterSaldoContaCorrenteQueryHandler
+        IContaCorrenteRepository contaCorrenteRepository) : IObterSaldoContaCorrenteQueryHandler
     {
         public async Task<ResultadoOperacao<SaldoContaCorrenteResponse>> Handle(ObterSaldoContaCorrenteQuery query)
         {
@@ -26,11 +25,8 @@ namespace BankMore.ContaCorrente.Application.QueryHandlers.SaldoContaCorrente
                     "INACTIVE_ACCOUNT",
                     ["Conta corrente inativa."]);
 
-            // Busca movimentos da conta
-            var movimentos = await movimentoRepository.ObterPorContaAsync(conta.IdContaCorrente);
-
-            // Calcula saldo: créditos - débitos
-            var saldo = movimentos.Sum(m => m.TipoMovimento == "C" ? m.Valor : -m.Valor);
+            // Calcula saldo direto do banco
+            var saldo = await contaCorrenteRepository.ObterSaldoAsync(conta.IdContaCorrente);
 
             var response = new SaldoContaCorrenteResponse
             {

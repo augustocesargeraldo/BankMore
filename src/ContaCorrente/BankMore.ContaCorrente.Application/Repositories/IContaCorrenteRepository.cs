@@ -6,5 +6,6 @@
         Task AdicionarAsync(Domain.Entities.ContaCorrente conta);
         Task<Domain.Entities.ContaCorrente?> ObterPorIdAsync(string id);
         Task InativarAsync(string idContaCorrente);
+        Task<decimal> ObterSaldoAsync(string idContaCorrente);
     }
 }
